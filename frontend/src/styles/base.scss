@@ -1,0 +1,196 @@
+// Sacred Consciousness Platform - Base Styles
+// Foundation styles for the consciousness platform
+
+@use './sacred-variables.scss' as *;
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌟 GLOBAL RESET & BASE
+// ═══════════════════════════════════════════════════════════════════════════════
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: $font-family-primary;
+  background: var(--bg-cosmic);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎯 UTILITY CLASSES
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+  
+  @include mobile-only {
+    padding: 0 $spacing-md;
+  }
+}
+
+.sacred-grid {
+  display: grid;
+  gap: $spacing-lg;
+  
+  &--2 { grid-template-columns: repeat(2, 1fr); }
+  &--3 { grid-template-columns: repeat(3, 1fr); }
+  &--4 { grid-template-columns: repeat(4, 1fr); }
+  
+  @include mobile-only {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sacred-flex {
+  display: flex;
+  gap: $spacing-md;
+  
+  &--center {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &--between {
+    justify-content: space-between;
+  }
+  
+  &--column {
+    flex-direction: column;
+  }
+}
+
+// Text Utilities
+.text-sacred {
+  @include consciousness-text();
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-xs { font-size: $font-xs; }
+.text-sm { font-size: $font-sm; }
+.text-base { font-size: $font-base; }
+.text-lg { font-size: $font-lg; }
+.text-xl { font-size: $font-xl; }
+.text-2xl { font-size: $font-2xl; }
+.text-3xl { font-size: $font-3xl; }
+.text-4xl { font-size: $font-4xl; }
+.text-5xl { font-size: $font-5xl; }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎨 COMPONENT BASE CLASSES  
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-card {
+  @include sacred-card();
+}
+
+.sacred-button {
+  @include sacred-button();
+  
+  &--secondary {
+    @include sacred-button(secondary);
+  }
+}
+
+.sacred-input {
+  background: var(--bg-glass);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
+  padding: $spacing-md $spacing-lg;
+  color: var(--text-primary);
+  font-family: $font-family-primary;
+  transition: all $transition-normal;
+  
+  &:focus {
+    outline: none;
+    border-color: $sacred-gold;
+    @include sacred-glow($sacred-gold, 0.2);
+  }
+  
+  &::placeholder {
+    color: var(--text-muted);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌊 ANIMATIONS & EFFECTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.animate-pulse {
+  animation: sacredPulse $anim-pulse ease-in-out infinite;
+}
+
+.animate-float {
+  animation: sacredFloat $anim-float ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: sacredRotate $anim-rotate linear infinite;
+}
+
+.animate-breath {
+  animation: consciousnessBreath $anim-breath ease-in-out infinite;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎭 VISIBILITY & RESPONSIVE
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.hidden { display: none !important; }
+.visible { display: block !important; }
+
+.mobile-only {
+  @include tablet-up {
+    display: none !important;
+  }
+}
+
+.desktop-only {
+  @include mobile-only {
+    display: none !important;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌟 SACRED SCROLL BEHAVIOR
+// ═══════════════════════════════════════════════════════════════════════════════
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sacred-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, $sacred-purple, $sacred-blue);
+  border-radius: $radius-full;
+  
+  &:hover {
+    background: linear-gradient(45deg, $sacred-gold, $sacred-orange);
+  }
+}

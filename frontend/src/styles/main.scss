@@ -1,0 +1,76 @@
+// Sacred Consciousness Platform - Main Styles
+// Central import file for all sacred styles
+
+// Modern Sass syntax with @use and @forward
+@use './sacred-variables.scss' as *;
+@forward './sacred-variables.scss';
+@use './base.scss';
+@use './components.scss';
+
+// Global Sacred Consciousness Styles applied to the entire application
+body {
+  // Ensure cosmic background covers entire viewport
+  min-height: 100vh;
+  background: var(--bg-cosmic);
+  background-attachment: fixed;
+  
+  // Sacred text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  // Prevent horizontal scroll on mobile
+  overflow-x: hidden;
+}
+
+// Sacred app container
+#app {
+  min-height: 100vh;
+  position: relative;
+  z-index: $z-base;
+}
+
+// Ensure all links maintain sacred styling
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all $transition-normal;
+  
+  &:hover {
+    color: $sacred-gold;
+  }
+}
+
+// Sacred selection styles
+::selection {
+  background: rgba(255, 215, 0, 0.2);
+  color: $sacred-gold;
+}
+
+::-moz-selection {
+  background: rgba(255, 215, 0, 0.2);
+  color: $sacred-gold;
+}
+
+// Focus styles for accessibility
+:focus {
+  outline: 2px solid $sacred-gold;
+  outline-offset: 2px;
+  border-radius: $radius-sm;
+}
+
+// Sacred fonts will be loaded via CSS imports or web fonts
+// Custom font loading can be added here when sacred fonts are available
+
+// Print styles for sacred documents
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .sacred-geometry-background,
+  .sacred-particles {
+    display: none !important;
+  }
+}

@@ -1,0 +1,457 @@
+// Sacred Consciousness Design System
+// Inspired by cosmic harmony and golden ratio principles
+
+// Sacred Color Palette
+:root {
+  // Primary Sacred Colors
+  --sacred-deep-space: #0d0d23;
+  --sacred-cosmic-blue: #1a1a2e;
+  --sacred-midnight: #16213e;
+  --sacred-twilight: #0f3460;
+  
+  // Sacred Metallics
+  --sacred-gold: #ffd700;
+  --sacred-silver: #c0c0c0;
+  --sacred-copper: #b87333;
+  --sacred-platinum: #e5e4e2;
+  
+  // Sacred Gemstone Colors
+  --sacred-violet: #6a4c93;
+  --sacred-amethyst: #9b59b6;
+  --sacred-emerald: #2d5a27;
+  --sacred-sapphire: #0f4c81;
+  --sacred-ruby: #8b0000;
+  
+  // Sacred Light Spectrum
+  --sacred-white: #ffffff;
+  --sacred-light-silver: #f8f9fa;
+  --sacred-soft-gray: #e9ecef;
+  --sacred-medium-gray: #6c757d;
+  --sacred-dark-gray: #343a40;
+  
+  // Sacred Mathematical Constants
+  --golden-ratio: 1.618;
+  --fibonacci-1: 1px;
+  --fibonacci-2: 1px;
+  --fibonacci-3: 2px;
+  --fibonacci-5: 5px;
+  --fibonacci-8: 8px;
+  --fibonacci-13: 13px;
+  --fibonacci-21: 21px;
+  --fibonacci-34: 34px;
+  --fibonacci-55: 55px;
+  --fibonacci-89: 89px;
+  
+  // Sacred Spacing (Golden Ratio Based)
+  --space-xs: calc(var(--fibonacci-8) * 1px);     // 8px
+  --space-sm: calc(var(--fibonacci-13) * 1px);    // 13px
+  --space-md: calc(var(--fibonacci-21) * 1px);    // 21px
+  --space-lg: calc(var(--fibonacci-34) * 1px);    // 34px
+  --space-xl: calc(var(--fibonacci-55) * 1px);    // 55px
+  --space-xxl: calc(var(--fibonacci-89) * 1px);   // 89px
+  
+  // Sacred Border Radius (Fibonacci)
+  --radius-sm: var(--fibonacci-3);
+  --radius-md: var(--fibonacci-5);
+  --radius-lg: var(--fibonacci-8);
+  --radius-xl: var(--fibonacci-13);
+  --radius-circle: 50%;
+  
+  // Sacred Typography
+  --font-family-sacred: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  
+  // Sacred Font Sizes (Golden Ratio Scale)
+  --text-xs: 0.75rem;    // 12px
+  --text-sm: 0.875rem;   // 14px
+  --text-base: 1rem;     // 16px
+  --text-lg: 1.125rem;   // 18px
+  --text-xl: 1.25rem;    // 20px
+  --text-2xl: 1.5rem;    // 24px
+  --text-3xl: 1.875rem;  // 30px
+  --text-4xl: 2.25rem;   // 36px
+  --text-5xl: 3rem;      // 48px
+  --text-6xl: 3.75rem;   // 60px
+  
+  // Sacred Shadows (Based on Fibonacci)
+  --shadow-sm: 0 1px 2px 0 rgba(13, 13, 35, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(13, 13, 35, 0.1), 0 2px 4px -1px rgba(13, 13, 35, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(13, 13, 35, 0.1), 0 4px 6px -2px rgba(13, 13, 35, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(13, 13, 35, 0.1), 0 10px 10px -5px rgba(13, 13, 35, 0.04);
+  --shadow-sacred: 0 0 20px rgba(255, 215, 0, 0.3);
+  
+  // Sacred Transitions (Golden Ratio Timing)
+  --transition-quick: 0.15s ease-out;
+  --transition-normal: 0.25s ease-out;
+  --transition-slow: 0.618s cubic-bezier(0.618, 0, 0.382, 1);
+  --transition-sacred: 1.618s cubic-bezier(0.618, 0, 0.382, 1);
+  
+  // Sacred Z-Index Layers
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-sacred: 9999;
+}
+
+// Sacred Base Styles
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--golden-ratio);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family-sacred);
+  background: var(--sacred-deep-space);
+  color: var(--sacred-silver);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+// Sacred Typography
+.sacred-text {
+  &-xs { font-size: var(--text-xs); }
+  &-sm { font-size: var(--text-sm); }
+  &-base { font-size: var(--text-base); }
+  &-lg { font-size: var(--text-lg); }
+  &-xl { font-size: var(--text-xl); }
+  &-2xl { font-size: var(--text-2xl); }
+  &-3xl { font-size: var(--text-3xl); }
+  &-4xl { font-size: var(--text-4xl); }
+  &-5xl { font-size: var(--text-5xl); }
+  &-6xl { font-size: var(--text-6xl); }
+}
+
+.sacred-font {
+  &-light { font-weight: 300; }
+  &-normal { font-weight: 400; }
+  &-medium { font-weight: 500; }
+  &-semibold { font-weight: 600; }
+  &-bold { font-weight: 700; }
+}
+
+// Sacred Colors
+.sacred-color {
+  &-gold { color: var(--sacred-gold); }
+  &-silver { color: var(--sacred-silver); }
+  &-violet { color: var(--sacred-violet); }
+  &-emerald { color: var(--sacred-emerald); }
+  &-sapphire { color: var(--sacred-sapphire); }
+  &-white { color: var(--sacred-white); }
+}
+
+.sacred-bg {
+  &-deep-space { background-color: var(--sacred-deep-space); }
+  &-cosmic-blue { background-color: var(--sacred-cosmic-blue); }
+  &-midnight { background-color: var(--sacred-midnight); }
+  &-gold { background-color: var(--sacred-gold); }
+  &-violet { background-color: var(--sacred-violet); }
+}
+
+// Sacred Spacing
+.sacred-m {
+  &-0 { margin: 0; }
+  &-xs { margin: var(--space-xs); }
+  &-sm { margin: var(--space-sm); }
+  &-md { margin: var(--space-md); }
+  &-lg { margin: var(--space-lg); }
+  &-xl { margin: var(--space-xl); }
+  &-xxl { margin: var(--space-xxl); }
+}
+
+.sacred-p {
+  &-0 { padding: 0; }
+  &-xs { padding: var(--space-xs); }
+  &-sm { padding: var(--space-sm); }
+  &-md { padding: var(--space-md); }
+  &-lg { padding: var(--space-lg); }
+  &-xl { padding: var(--space-xl); }
+  &-xxl { padding: var(--space-xxl); }
+}
+
+// Sacred Buttons
+.sacred-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  
+  font-family: var(--font-family-sacred);
+  font-weight: 500;
+  text-decoration: none;
+  
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  
+  transition: all var(--transition-normal);
+  
+  &:disabled {
+    opacity: 0.618;
+    cursor: not-allowed;
+  }
+  
+  // Sacred Button Sizes
+  &-sm {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--text-sm);
+  }
+  
+  &-md {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-base);
+  }
+  
+  &-lg {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-lg);
+  }
+  
+  // Sacred Button Variants
+  &-primary {
+    background: linear-gradient(135deg, var(--sacred-gold), #ffed4e);
+    color: var(--sacred-deep-space);
+    box-shadow: var(--shadow-md);
+    
+    &:hover {
+      background: linear-gradient(135deg, #ffed4e, var(--sacred-gold));
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+  
+  &-secondary {
+    background: var(--sacred-cosmic-blue);
+    color: var(--sacred-silver);
+    border: 1px solid var(--sacred-violet);
+    
+    &:hover {
+      background: var(--sacred-violet);
+      color: var(--sacred-white);
+      box-shadow: var(--shadow-md);
+    }
+  }
+  
+  &-ghost {
+    background: transparent;
+    color: var(--sacred-silver);
+    border: 1px solid rgba(192, 192, 192, 0.3);
+    
+    &:hover {
+      background: rgba(192, 192, 192, 0.1);
+      border-color: var(--sacred-silver);
+    }
+  }
+  
+  &-sacred {
+    background: linear-gradient(135deg, var(--sacred-violet), var(--sacred-amethyst));
+    color: var(--sacred-white);
+    box-shadow: var(--shadow-sacred);
+    
+    &:hover {
+      background: linear-gradient(135deg, var(--sacred-amethyst), var(--sacred-violet));
+      box-shadow: 0 0 30px rgba(155, 89, 182, 0.5);
+      transform: translateY(-3px);
+    }
+  }
+}
+
+// Sacred Cards
+.sacred-card {
+  background: var(--sacred-cosmic-blue);
+  border: 1px solid rgba(192, 192, 192, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: var(--shadow-xl), var(--shadow-sacred);
+    transform: translateY(-5px);
+  }
+  
+  &-header {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(192, 192, 192, 0.1);
+  }
+  
+  &-title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--sacred-gold);
+    margin: 0 0 var(--space-xs) 0;
+  }
+  
+  &-subtitle {
+    font-size: var(--text-sm);
+    color: var(--sacred-medium-gray);
+    margin: 0;
+  }
+  
+  &-content {
+    color: var(--sacred-silver);
+    line-height: var(--golden-ratio);
+  }
+  
+  &-footer {
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid rgba(192, 192, 192, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+// Sacred Form Elements
+.sacred-input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  
+  background: var(--sacred-midnight);
+  border: 1px solid rgba(192, 192, 192, 0.2);
+  border-radius: var(--radius-lg);
+  
+  color: var(--sacred-white);
+  font-family: var(--font-family-sacred);
+  font-size: var(--text-base);
+  
+  transition: all var(--transition-normal);
+  
+  &::placeholder {
+    color: var(--sacred-medium-gray);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--sacred-gold);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  }
+  
+  &:invalid {
+    border-color: var(--sacred-ruby);
+  }
+}
+
+.sacred-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--sacred-silver);
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+// Sacred Animations
+@keyframes sacred-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.618; }
+}
+
+@keyframes sacred-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sacred-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+}
+
+@keyframes sacred-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.sacred-animate {
+  &-pulse { animation: sacred-pulse 2s ease-in-out infinite; }
+  &-spin { animation: sacred-spin 1s linear infinite; }
+  &-glow { animation: sacred-glow 3s ease-in-out infinite; }
+  &-float { animation: sacred-float 3s ease-in-out infinite; }
+}
+
+// Sacred Utility Classes
+.sacred-flex {
+  display: flex;
+  
+  &-center {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &-between {
+    justify-content: space-between;
+  }
+  
+  &-col {
+    flex-direction: column;
+  }
+  
+  &-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.sacred-grid {
+  display: grid;
+  gap: var(--space-md);
+  
+  &-2 { grid-template-columns: repeat(2, 1fr); }
+  &-3 { grid-template-columns: repeat(3, 1fr); }
+  &-4 { grid-template-columns: repeat(4, 1fr); }
+  
+  @media (max-width: 768px) {
+    &-2, &-3, &-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.sacred-hidden { display: none; }
+.sacred-visible { display: block; }
+
+// Sacred Scrollbar
+::-webkit-scrollbar {
+  width: var(--space-xs);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sacred-deep-space);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sacred-gold);
+  border-radius: var(--radius-circle);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffed4e;
+}
+
+// Sacred Selection
+::selection {
+  background: var(--sacred-gold);
+  color: var(--sacred-deep-space);
+}
+
+::-moz-selection {
+  background: var(--sacred-gold);
+  color: var(--sacred-deep-space);
+}

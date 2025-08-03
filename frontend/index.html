@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/syntopia-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SYNtopia 2.0 - Sacred Consciousness Platform" />
+    <meta name="theme-color" content="#0d0d23" />
+    
+    <!-- Sacred Geometry Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <title>SYNtopia 2.0 - Sacred Consciousness Platform</title>
+    
+    <style>
+      /* Sacred Consciousness Global Styles */
+      :root {
+        --sacred-deep-space: #0d0d23;
+        --sacred-gold: #ffd700;
+        --sacred-silver: #c0c0c0;
+        --sacred-violet: #6a4c93;
+        --sacred-emerald: #2d5a27;
+        --fibonacci-ratio: 1.618;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--sacred-deep-space);
+        color: var(--sacred-silver);
+        overflow-x: hidden;
+      }
+      
+      #app {
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--sacred-deep-space) 0%, #1a1a2e 100%);
+      }
+      
+      /* Sacred Loading Animation */
+      .sacred-loader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      }
+      
+      .fibonacci-spiral {
+        width: 64px;
+        height: 64px;
+        border: 2px solid var(--sacred-gold);
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: sacred-spin 1.618s linear infinite;
+      }
+      
+      @keyframes sacred-spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Sacred Loading Screen -->
+      <div class="sacred-loader" id="loading">
+        <div class="fibonacci-spiral"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

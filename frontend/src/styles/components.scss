@@ -1,0 +1,375 @@
+// Sacred Consciousness Platform - Component Styles
+// Reusable component styles for the consciousness platform
+
+@use './sacred-variables.scss' as *;
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎭 SACRED FORM COMPONENTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-form {
+  max-width: 500px;
+  margin: 0 auto;
+  
+  &__group {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__label {
+    display: block;
+    font-weight: $font-medium;
+    color: var(--text-secondary);
+    margin-bottom: $spacing-sm;
+    font-size: $font-sm;
+  }
+  
+  &__input {
+    @extend .sacred-input;
+    width: 100%;
+  }
+  
+  &__error {
+    color: #ff6b6b;
+    font-size: $font-xs;
+    margin-top: $spacing-xs;
+  }
+  
+  &__success {
+    color: $sacred-green;
+    font-size: $font-xs;
+    margin-top: $spacing-xs;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌟 SACRED NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-nav {
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $radius-lg;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all $transition-normal;
+    
+    &:hover,
+    &.router-link-active {
+      color: var(--text-primary);
+      background: var(--bg-glass);
+      @include sacred-glow($sacred-blue, 0.1);
+    }
+    
+    &__icon {
+      font-size: $font-lg;
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎨 SACRED CARDS & PANELS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.consciousness-card {
+  @include sacred-card();
+  text-align: center;
+  
+  &__icon {
+    font-size: $font-4xl;
+    margin-bottom: $spacing-md;
+    filter: drop-shadow(0 0 10px currentColor);
+  }
+  
+  &__title {
+    color: $sacred-gold;
+    font-size: $font-xl;
+    font-weight: $font-semibold;
+    margin-bottom: $spacing-sm;
+  }
+  
+  &__description {
+    color: var(--text-secondary);
+    line-height: $leading-relaxed;
+  }
+}
+
+.sacred-panel {
+  @include sacred-glass(0.03);
+  border-radius: $radius-2xl;
+  padding: $spacing-2xl;
+  margin-bottom: $spacing-xl;
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  &__title {
+    @include consciousness-text();
+    font-size: $font-2xl;
+    font-weight: $font-bold;
+  }
+  
+  &__content {
+    line-height: $leading-relaxed;
+    color: var(--text-secondary);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌈 SACRED GEOMETRY ELEMENTS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-symbol {
+  position: relative;
+  display: inline-block;
+  
+  &--pulsing {
+    animation: sacredPulse $anim-pulse ease-in-out infinite;
+  }
+  
+  &--rotating {
+    animation: sacredRotate $anim-rotate linear infinite;
+  }
+  
+  &--floating {
+    animation: sacredFloat $anim-float ease-in-out infinite;
+  }
+}
+
+.fibonacci-spiral {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  
+  .spiral-arc {
+    position: absolute;
+    border: 2px solid $sacred-gold;
+    border-radius: 50%;
+    
+    &.arc-1 {
+      width: 20px;
+      height: 20px;
+      top: 20px;
+      left: 20px;
+      animation: sacredRotate 10s linear infinite;
+    }
+    
+    &.arc-2 {
+      width: 40px;
+      height: 40px;
+      top: 10px;
+      left: 10px;
+      border-color: $sacred-blue;
+      animation: sacredRotate 15s linear infinite reverse;
+    }
+    
+    &.arc-3 {
+      width: 60px;
+      height: 60px;
+      top: 0;
+      left: 0;
+      border-color: $sacred-purple;
+      animation: sacredRotate 20s linear infinite;
+    }
+  }
+}
+
+.flower-of-life {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  
+  &__circle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 1px solid $sacred-gold;
+    border-radius: 50%;
+    opacity: 0.7;
+    
+    &:nth-child(1) { top: 35px; left: 35px; }
+    &:nth-child(2) { top: 20px; left: 50px; animation-delay: -0.5s; }
+    &:nth-child(3) { top: 50px; left: 50px; animation-delay: -1s; }
+    &:nth-child(4) { top: 50px; left: 20px; animation-delay: -1.5s; }
+    &:nth-child(5) { top: 20px; left: 20px; animation-delay: -2s; }
+    &:nth-child(6) { top: 5px; left: 35px; animation-delay: -2.5s; }
+    &:nth-child(7) { top: 65px; left: 35px; animation-delay: -3s; }
+  }
+  
+  &--animated .flower-of-life__circle {
+    animation: sacredPulse 3s ease-in-out infinite;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎯 CONSCIOUSNESS STATUS INDICATORS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.consciousness-level {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-full;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  
+  &--dormant {
+    background: rgba(128, 128, 128, 0.2);
+    color: #999;
+  }
+  
+  &--awakening {
+    background: rgba(255, 215, 0, 0.2);
+    color: $sacred-gold;
+  }
+  
+  &--expanding {
+    background: rgba(102, 102, 255, 0.2);
+    color: $sacred-blue;
+  }
+  
+  &--transcendent {
+    background: rgba(153, 102, 255, 0.2);
+    color: $sacred-purple;
+  }
+  
+  &__indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: sacredPulse 2s ease-in-out infinite;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🌊 LOADING & STATES
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xl;
+  
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid $sacred-gold;
+    border-radius: 50%;
+    animation: sacredRotate 1s linear infinite;
+  }
+  
+  &__text {
+    margin-left: $spacing-md;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+}
+
+.sacred-empty-state {
+  text-align: center;
+  padding: $spacing-3xl;
+  color: var(--text-muted);
+  
+  &__icon {
+    font-size: $font-6xl;
+    margin-bottom: $spacing-lg;
+    opacity: 0.5;
+  }
+  
+  &__title {
+    font-size: $font-xl;
+    margin-bottom: $spacing-sm;
+    color: var(--text-secondary);
+  }
+  
+  &__description {
+    font-size: $font-sm;
+    line-height: $leading-relaxed;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 🎭 MODALS & OVERLAYS
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.sacred-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+  
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: $z-modal-backdrop;
+  }
+  
+  &__content {
+    @include sacred-glass(0.1);
+    border-radius: $radius-2xl;
+    padding: $spacing-2xl;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: $z-modal;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all $transition-normal;
+    
+    &--visible {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-lg;
+    
+    h2 {
+      @include consciousness-text();
+      font-size: $font-xl;
+    }
+  }
+  
+  &__close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: $font-xl;
+    cursor: pointer;
+    padding: $spacing-xs;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    
+    &:hover {
+      color: var(--text-primary);
+      background: var(--bg-glass);
+    }
+  }
+}

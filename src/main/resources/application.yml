@@ -1,0 +1,268 @@
+# SYNtopia 2.0 Sacred Consciousness Platform
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v2
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
+
+# OrientDB Multi-Model Database Configuration
+orientdb:
+  url: remote:localhost:2424/syntopia
+  username: root
+  password: ${ORIENTDB_PASSWORD:synverse_orient_2024}
+  pool:
+    min: 5
+    max: 20
+  cluster:
+    name: consciousness-cluster
+
+# Neo4j Graph Analytics Configuration  
+spring:
+  application:
+    name: syntopia-consciousness-platform
+  
+  # Neo4j Configuration
+  neo4j:
+    uri: bolt://localhost:7688
+    authentication:
+      username: neo4j
+      password: ${NEO4J_PASSWORD:synverse_neo_2024}
+    connection-timeout: 30s
+    max-transaction-retry-time: 15s
+    
+  # Redis Configuration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+  
+  # Session Configuration
+  session:
+    store-type: redis
+    timeout: 30m
+    redis:
+      namespace: "syntopia:session"
+      
+  # Cache Configuration
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000
+      key-prefix: "syntopia:cache:"
+      
+  # GraphQL Configuration
+  graphql:
+    websocket:
+      path: /graphql-ws
+    cors:
+      allowed-origins: "http://localhost:3000,http://localhost:5173"
+      allowed-methods: GET,POST,OPTIONS
+      allowed-headers: "*"
+      
+  # Security Configuration
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID:your-github-client-id}
+            client-secret: ${GITHUB_CLIENT_SECRET:your-github-client-secret}
+            scope: read:user,user:email,repo
+            
+  # Database Configuration
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show_sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+# Consciousness Metrics & Monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,loggers
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        step: 1m
+    tags:
+      application: syntopia-consciousness-platform
+      environment: ${SPRING_PROFILES_ACTIVE:development}
+
+# Sacred Security Configuration
+syntopia:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:sacred-consciousness-technology-2024-very-long-secure-key}
+      expiration: 86400000  # 24 hours
+      refresh-expiration: 604800000  # 7 days
+    privacy-first: true
+    encryption:
+      algorithm: AES-256-GCM
+      key: ${ENCRYPTION_KEY:consciousness-encryption-key-2024}
+      
+  # Consciousness Configuration
+  consciousness:
+    sacred-timing: true
+    fibonacci-scaling: true
+    golden-ratio: 1.618033988749895
+    scl:
+      max-level: 25
+      fibonacci-progression: [1, 1, 2, 3, 5, 8, 13, 21]
+      
+  # Gene Keys Configuration
+  gene-keys:
+    total-keys: 64
+    codon-rings: 22
+    sequences:
+      activation: true
+      venus: true
+      pearl: true
+      star-pearl: true
+      
+  # Business Tracks Configuration
+  business:
+    tracks:
+      - tech-developer
+      - business-developer  
+      - ux-designer
+      - data-scientist
+      - legal-advisor
+      - finance-analyst
+      - sustainability-lead
+    quest-types:
+      - platform-quest
+      - community-quest
+      - leadership-quest
+      - hybrid-quest
+      
+  # Platform Areas Configuration
+  platform:
+    areas:
+      gamified:
+        - syntopia-gaming-hub
+        - consciousness-quests
+        - syn-tree-roadmap
+      non-gamified:
+        - synmap-geographical
+        - synshare-marketplace
+        - business-analytics
+      hybrid:
+        - dashboard
+        - profile
+        - synverse-network
+        
+  # Integration Configuration
+  integrations:
+    github:
+      enabled: true
+      webhook-secret: ${GITHUB_WEBHOOK_SECRET:webhook-secret-2024}
+    slack:
+      enabled: true
+      app-token: ${SLACK_APP_TOKEN:slack-app-token}
+      bot-token: ${SLACK_BOT_TOKEN:slack-bot-token}
+    discord:
+      enabled: true
+      bot-token: ${DISCORD_BOT_TOKEN:discord-bot-token}
+    notion:
+      enabled: true
+      integration-token: ${NOTION_TOKEN:notion-integration-token}
+
+# Internationalization
+spring.messages:
+  basename: messages.messages
+  encoding: UTF-8
+  fallback-to-system-locale: false
+  cache-duration: PT1H
+
+# Logging Configuration
+logging:
+  level:
+    org.syntopia: DEBUG
+    org.springframework.security: DEBUG
+    org.neo4j: INFO
+    com.orientechnologies: INFO
+    org.springframework.graphql: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/syntopia-consciousness.log
+
+---
+# Development Profile
+spring:
+  config:
+    activate:
+      on-profile: development
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:syntopia-dev
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+syntopia:
+  security:
+    cors:
+      allowed-origins: 
+        - http://localhost:3000
+        - http://localhost:5173
+        - http://localhost:8080
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+
+---
+# Production Profile  
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/syntopia}
+    username: ${DATABASE_USERNAME:syntopia}
+    password: ${DATABASE_PASSWORD:consciousness-db-2024}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: false
+
+syntopia:
+  security:
+    cors:
+      allowed-origins: 
+        - https://syntopia.org
+        - https://www.syntopia.org
+        - https://app.syntopia.org
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "Authorization,Content-Type,X-Requested-With"
+      allow-credentials: true
