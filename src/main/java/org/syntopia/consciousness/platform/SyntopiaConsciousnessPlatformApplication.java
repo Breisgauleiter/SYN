@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Main Application Entry Point for the Neural Network of Humanity
  * 
  * Features:
- * - Multi-Model Database Architecture (OrientDB + Neo4j + Redis)
+ * - TAO-based Database Architecture (ArangoDB Multi-Model + Redis)
  * - Sacred Geometry UI with Cosmic Design System  
  * - Gene Keys Integration with 4 Sequences + 22 Codon Rings
  * - Gamified Business System with SCL 1-25 Progression

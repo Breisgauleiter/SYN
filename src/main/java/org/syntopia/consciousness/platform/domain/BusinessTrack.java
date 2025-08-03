@@ -13,7 +13,7 @@ public enum BusinessTrack {
     
     // Tech Development Track
     TECH_DEVELOPER("Tech Developer", "Platform development and technical innovation", 
-                   new String[]{"Java", "Spring Boot", "OrientDB", "Vue.js", "GraphQL"}),
+                   new String[]{"Java", "Spring Boot", "ArangoDB", "Vue.js", "GraphQL", "TAO"}),
     
     // Business Development Track  
     BUSINESS_DEVELOPER("Business Developer", "Strategic partnerships and growth",

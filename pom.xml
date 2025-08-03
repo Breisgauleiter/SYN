@@ -21,8 +21,7 @@
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
-        <orientdb.version>3.2.15</orientdb.version>
-        <neo4j.version>5.15.0</neo4j.version>
+        <arangodb.version>7.3.0</arangodb.version>
         <redis.version>3.3.2</redis.version>
         <graphql.version>22.1</graphql.version>
         <testcontainers.version>1.19.8</testcontainers.version>
@@ -60,29 +59,17 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
         
-        <!-- OrientDB Multi-Model Database -->
+        <!-- ArangoDB Multi-Model Database -->
         <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-core</artifactId>
-            <version>${orientdb.version}</version>
+            <groupId>com.arangodb</groupId>
+            <artifactId>arangodb-spring-boot-starter</artifactId>
+            <version>${arangodb.version}</version>
         </dependency>
         
         <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-client</artifactId>
-            <version>${orientdb.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-object</artifactId>
-            <version>${orientdb.version}</version>
-        </dependency>
-        
-        <!-- Neo4j Graph Analytics -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-neo4j</artifactId>
+            <groupId>com.arangodb</groupId>
+            <artifactId>arangodb-java-driver</artifactId>
+            <version>${arangodb.version}</version>
         </dependency>
         
         <!-- Redis Session & Caching -->
@@ -163,14 +150,7 @@
         
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>orientdb</artifactId>
-            <version>${testcontainers.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>neo4j</artifactId>
+            <artifactId>arangodb</artifactId>
             <version>${testcontainers.version}</version>
             <scope>test</scope>
         </dependency>

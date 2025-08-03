@@ -7,30 +7,21 @@ server:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
 
-# OrientDB Multi-Model Database Configuration
-orientdb:
-  url: remote:localhost:2424/syntopia
-  username: root
-  password: ${ORIENTDB_PASSWORD:synverse_orient_2024}
-  pool:
-    min: 5
-    max: 20
-  cluster:
-    name: consciousness-cluster
+# ArangoDB TAO-based Multi-Model Database Configuration
+arangodb:
+  hosts: 127.0.0.1:8529
+  database: syntopia_consciousness
+  user: root
+  password: ${ARANGODB_PASSWORD:synverse_arango_2024}
+  connection:
+    pool-size: 20
+    timeout: 30000
+  tao:
+    enabled: true
 
-# Neo4j Graph Analytics Configuration  
 spring:
   application:
     name: syntopia-consciousness-platform
-  
-  # Neo4j Configuration
-  neo4j:
-    uri: bolt://localhost:7688
-    authentication:
-      username: neo4j
-      password: ${NEO4J_PASSWORD:synverse_neo_2024}
-    connection-timeout: 30s
-    max-transaction-retry-time: 15s
     
   # Redis Configuration
   data:
@@ -201,8 +192,7 @@ logging:
   level:
     org.syntopia: DEBUG
     org.springframework.security: DEBUG
-    org.neo4j: INFO
-    com.orientechnologies: INFO
+    com.arangodb: INFO
     org.springframework.graphql: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
