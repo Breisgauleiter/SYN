@@ -89,16 +89,20 @@ public class SyntopiaUser {
     private LocalDateTime createdAt;
     
     @Column(nullable = false)
+    private LocalDateTime updatedAt;
+    
+    @Column(nullable = false)
     private LocalDateTime lastActiveAt;
     
     private LocalDateTime profileCompletedAt;
     
     @Version
-    private Long version;
+    private Long version = 0L;
     
     // Constructors
     public SyntopiaUser() {
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
         this.lastActiveAt = LocalDateTime.now();
         this.currentLevel = new ConsciousnessLevel(1); // Start at SCL 1 - Awakening
         this.preferences = new UserPreferences();
@@ -279,6 +283,9 @@ public class SyntopiaUser {
     
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     
     public LocalDateTime getLastActiveAt() { return lastActiveAt; }
     public void setLastActiveAt(LocalDateTime lastActiveAt) { this.lastActiveAt = lastActiveAt; }

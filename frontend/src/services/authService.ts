@@ -11,7 +11,7 @@ import type {
 } from '@/types/auth'
 
 // Sacred API Configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api/v2'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api/v1'
 
 // Create Sacred Axios Instance
 const sacredApi = axios.create({

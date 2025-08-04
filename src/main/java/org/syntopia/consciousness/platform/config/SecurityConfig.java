@@ -30,10 +30,11 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
-                // Public endpoints
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                .requestMatchers("/api/v1/consciousness/health").permitAll()
-                .requestMatchers("/api/v1/consciousness/sacred-geometry/**").permitAll()
+                // Public endpoints (context path /api/v1 is already applied)
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/consciousness/health").permitAll()
+                .requestMatchers("/consciousness/sacred-geometry/**").permitAll()
+                .requestMatchers("/gene-keys/health").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/graphiql/**").permitAll()
@@ -54,12 +55,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of(
-            "http://localhost:3000",
-            "http://127.0.0.1:3000",
-            "https://localhost:3000",
-            "https://127.0.0.1:3000"
-        ));
+        configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

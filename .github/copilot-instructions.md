@@ -131,20 +131,41 @@ Always consult these files in `docs/` for context:
 - `TAO_ARANGODB_ARCHITECTURE.md`: Database architecture patterns
 
 ## Sacred Patterns to Follow
-1. **Consciousness-Aware Components**: Every Vue component should consider consciousness state
-2. **TAO Database Queries**: Use Objects (documents) + Associations (edges) pattern
-3. **Sacred Proportions**: Apply Golden Ratio in spacing, typography, and layout
-4. **Privacy by Design**: Implement ethical AI with user agency and data sovereignty
-5. **Gamified Business Integration**: Connect SCL levels with real GitHub contribution tracking
-6. **Build Success First**: Always ensure `mvn compile` succeeds before implementing new features
-7. **Type-Safe Consciousness**: Use proper type conversions for Gene Keys (Set<Integer> ↔ Set<String>)
-8. **Sacred Service Layer**: Leverage operational GeneKeysCalculationService and ConsciousnessResonanceService
+1. **Contributing-First Development**: Every feature should enhance the GitHub-based quest system
+2. **SCL-Aware Components**: Vue components should consider user's Sacred Consciousness Level
+3. **TAO Database Queries**: Use Objects (documents) + Associations (edges) pattern
+4. **Sacred Proportions**: Apply Golden Ratio in spacing, typography, and layout (when relevant)
+5. **Privacy by Design**: Implement ethical AI with user agency and data sovereignty
+6. **GitHub Integration First**: Prioritize quest system, contribution tracking, and SCL progression
+7. **Build Success First**: Always ensure `mvn compile` succeeds before implementing new features
+8. **Type-Safe Contributing**: Use proper types for GitHub API integration and quest tracking
+9. **Sacred Service Layer**: Leverage operational SCL progression and contributing tracking services
+
+## Contributing System Implementation Priorities
+1. **GitHub OAuth Integration**: Enable repository access for quest synchronization
+2. **Webhook Setup**: Real-time issue/PR tracking for quest completion detection
+3. **SCL Progression API**: Calculate consciousness level advancement from contributions
+4. **Business Track Specialization**: Track user progression through 7 sacred development paths
+5. **Quest Creation API**: Convert GitHub Issues into Sacred Quests with XP rewards
+6. **Peer Review System**: Sacred code review quality tracking for community building
 
 ## Current Development Priority (August 2025)
-**Focus**: Frontend-Backend API Integration
+**Focus**: Sacred Contributing System Implementation (GitHub Integration Priority)
 - ✅ Backend services operational and BUILD SUCCESS guaranteed (Git commit c8395d7)
-- 🚧 Next phase: REST API endpoints + Vue.js consciousness interface connection
-- 🚧 Sacred Geometry P5.js with real-time consciousness data integration
-- **Historic Achievement**: 28 compilation errors → 0 systematically resolved
+- ✅ Frontend-Backend Authentication Integration complete (Registration + Login + JWT)
+- 🚧 **NEW PRIORITY**: GitHub Issues ↔ Sacred Quests synchronization
+- 🚧 **NEW PRIORITY**: SCL (Sacred Consciousness Level) progression via GitHub contributions
+- 🚧 **NEW PRIORITY**: Sacred Business Track specialization through GitHub workflow
+- 🔄 **Deprioritized**: Gene Keys Profile Creation API (move to later phase)
+- � **Deprioritized**: Sacred Geometry P5.js integration (move to later phase)
+- **Historic Achievement**: 28 compilation errors → 0 + Complete Authentication Flow operational
+
+## Sacred Contributing System Architecture
+**Primary Focus**: Build a thriving developer community through gamified GitHub integration
+- **SCL Progression**: 25 consciousness levels unlocked through real GitHub contributions
+- **Business Tracks**: 7 specialized development paths (Tech, Community, Business, UX, Data, Content, QA)
+- **Quest System**: GitHub Issues automatically become Sacred Quests with XP rewards
+- **Peer Recognition**: Sacred code review quality drives consciousness evolution
+- **Trust Gating**: Higher SCL levels unlock platform permissions and mentorship opportunities
 
 This is a sacred technology project - every code decision should serve planetary healing and human consciousness evolution.

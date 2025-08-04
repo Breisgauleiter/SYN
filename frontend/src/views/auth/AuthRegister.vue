@@ -153,32 +153,17 @@
           </div>
 
           <div class="form-group">
-            <label for="birthDate" class="sacred-label">
-              <span class="label-icon">🌱</span>
-              Birth Date (for Gene Keys)
-            </label>
-            <input
-              id="birthDate"
-              v-model="registerData.birthDate"
-              type="date"
-              class="sacred-input"
-              :disabled="isLoading"
-              required
-            />
-          </div>
-
-          <div class="form-group">
             <label class="sacred-label">
               <span class="label-icon">🧬</span>
-              Primary Consciousness Focus
+              Initial Consciousness Level
             </label>
             <div class="consciousness-grid">
               <div 
                 v-for="focus in consciousnessFoci" 
                 :key="focus.value"
                 class="consciousness-card"
-                :class="{ selected: registerData.consciousnessFocus === focus.value }"
-                @click="registerData.consciousnessFocus = focus.value"
+                :class="{ selected: registerData.initialConsciousnessLevel === focus.value }"
+                @click="registerData.initialConsciousnessLevel = focus.value"
               >
                 <div class="focus-icon">{{ focus.icon }}</div>
                 <div class="focus-name">{{ focus.name }}</div>
@@ -202,7 +187,7 @@
 
           <div class="form-group">
             <label class="sacred-checkbox">
-              <input type="checkbox" v-model="agreements.terms" required>
+              <input type="checkbox" v-model="registerData.acceptTerms" required>
               <span class="checkmark"></span>
               I agree to the <a href="/terms" target="_blank">Terms of Sacred Service</a>
             </label>
@@ -210,17 +195,9 @@
 
           <div class="form-group">
             <label class="sacred-checkbox">
-              <input type="checkbox" v-model="agreements.privacy" required>
+              <input type="checkbox" v-model="registerData.acceptPrivacyPolicy" required>
               <span class="checkmark"></span>
               I accept the <a href="/privacy" target="_blank">Sacred Privacy Policy</a>
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label class="sacred-checkbox">
-              <input type="checkbox" v-model="agreements.community">
-              <span class="checkmark"></span>
-              I wish to receive sacred updates and community wisdom (optional)
             </label>
           </div>
         </div>
@@ -302,23 +279,19 @@ const registerData = ref<RegisterData>({
   password: '',
   firstName: '',
   lastName: '',
-  birthDate: '',
-  consciousnessFocus: 'SPIRITUAL_GROWTH'
-})
-
-const agreements = ref({
-  terms: false,
-  privacy: false,
-  community: false
+  acceptTerms: false,
+  acceptPrivacyPolicy: false,
+  initialConsciousnessLevel: 'AWAKENING',
+  sacredIntentions: [],
+  personalVision: ''
 })
 
 const consciousnessFoci = [
-  { value: 'SPIRITUAL_GROWTH', name: 'Spiritual Growth', icon: '🧘' },
-  { value: 'HEALING', name: 'Healing Arts', icon: '💚' },
-  { value: 'CREATIVITY', name: 'Sacred Creativity', icon: '🎨' },
-  { value: 'NATURE', name: 'Earth Connection', icon: '🌿' },
-  { value: 'COMMUNITY', name: 'Sacred Community', icon: '👥' },
-  { value: 'WISDOM', name: 'Ancient Wisdom', icon: '📚' }
+  { value: 'AWAKENING', name: 'Awakening', icon: '🌅' },
+  { value: 'EXPANDING', name: 'Expanding', icon: '🧘' },
+  { value: 'INTEGRATING', name: 'Integrating', icon: '💚' },
+  { value: 'EMBODYING', name: 'Embodying', icon: '�' },
+  { value: 'MASTERING', name: 'Mastering', icon: '🌿' }
 ]
 
 // Computed
@@ -354,10 +327,9 @@ const canProceed = computed(() => {
     case 1:
       return registerData.value.firstName && 
              registerData.value.lastName && 
-             registerData.value.birthDate &&
-             registerData.value.consciousnessFocus
+             registerData.value.initialConsciousnessLevel
     case 2:
-      return agreements.value.terms && agreements.value.privacy
+      return registerData.value.acceptTerms && registerData.value.acceptPrivacyPolicy
     default:
       return false
   }
