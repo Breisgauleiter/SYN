@@ -10,22 +10,24 @@ import jakarta.persistence.*;
  * - Line (1-6) for specific life themes
  * - Shadow, Gift, and Siddhi frequencies for consciousness evolution
  */
-@Embeddable
+@Entity
+@Table(name = "gene_keys")
 public class GeneKey {
     
-    @Column(name = "key_number")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(name = "key_number", unique = true)
     private int keyNumber; // 1-64
     
     @Column(name = "line_number") 
     private int line; // 1-6
     
-    @Column(name = "shadow_aspect")
     private String shadowAspect; // Low frequency expression
     
-    @Column(name = "gift_aspect")
     private String giftAspect; // Balanced frequency expression
     
-    @Column(name = "siddhi_aspect")
     private String siddhiAspect; // High frequency divine expression
     
     // Constructors
@@ -87,6 +89,9 @@ public class GeneKey {
     }
     
     // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    
     public int getKeyNumber() { return keyNumber; }
     public void setKeyNumber(int keyNumber) { this.keyNumber = keyNumber; }
     

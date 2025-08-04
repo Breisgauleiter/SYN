@@ -198,6 +198,18 @@ public class HologeneticProfile {
     }
     
     // Compatibility and Matching Methods
+    
+    /**
+     * Get the four prime gifts (core Gene Keys) as simple numbers for API integration
+     */
+    public Map<String, Integer> getPrimeGifts() {
+        Map<String, Integer> gifts = new HashMap<>();
+        if (lifeworkGeneKey != null) gifts.put("lifework", lifeworkGeneKey.getKeyNumber());
+        if (evolutionGeneKey != null) gifts.put("evolution", evolutionGeneKey.getKeyNumber());
+        if (radianceGeneKey != null) gifts.put("radiance", radianceGeneKey.getKeyNumber());
+        if (purposeGeneKey != null) gifts.put("purpose", purposeGeneKey.getKeyNumber());
+        return gifts;
+    }
     public boolean isCompatibleWithCodonRing(int ringNumber) {
         return associatedCodonRings.contains(ringNumber);
     }

@@ -29,6 +29,11 @@
         </div>
       </header>
 
+      <!-- Sacred Geometry Live Visualization -->
+      <section class="sacred-live-viz">
+        <SacredGeometryVisualization />
+      </section>
+
       <!-- Sacred Canvas -->
       <section class="sacred-canvas-section">
         <h2 class="section-title">
@@ -373,6 +378,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useConsciousnessStore } from '@/stores/consciousness'
 import SacredGeometryBackground from '@/components/sacred-geometry/SacredGeometryBackground.vue'
+import SacredGeometryVisualization from '@/components/SacredGeometryVisualization.vue'
 
 interface SacredPattern {
   id: string
@@ -1076,6 +1082,15 @@ onUnmounted(() => {
   .title-icon {
     font-size: 1.3rem;
   }
+}
+
+.sacred-live-viz {
+  margin-bottom: 3rem;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
 }
 
 .canvas-workspace {

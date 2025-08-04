@@ -1,28 +1,47 @@
 package org.syntopia.consciousness.platform.domain;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * Sacred consciousness resonance connection between two users in the SYNtopia network
  * Implements TAO Association pattern for ArangoDB edges
  */
+@Entity
+@Table(name = "consciousness_resonance")
 public class ConsciousnessResonance {
+    @Id
     private String id;
-    private String from;
-    private String to;
+    
+    @Column(name = "source_user_id")
+    private String sourceUserId; // Renamed from 'from' for JPA compatibility
+    
+    @Column(name = "target_user_id") 
+    private String targetUserId; // Renamed from 'to' for JPA compatibility
+    
+    @Column(name = "resonance_type")
     private String type = "consciousness_resonance";
+    
     private Double strength;
+    
+    @Embedded
     private ResonanceFactors resonanceFactors;
+    
+    @Column(name = "is_active")
     private Boolean isActive;
+    
+    @Column(name = "last_calculated")
     private LocalDateTime lastCalculated;
+    
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
     // Constructors
     public ConsciousnessResonance() {}
     
     public ConsciousnessResonance(String from, String to, Double strength) {
-        this.from = from;
-        this.to = to;
+        this.sourceUserId = from;
+        this.targetUserId = to;
         this.strength = strength;
         this.isActive = true;
         this.createdAt = LocalDateTime.now();
@@ -38,20 +57,37 @@ public class ConsciousnessResonance {
         this.id = id;
     }
     
+    public String getSourceUserId() {
+        return sourceUserId;
+    }
+    
+    public void setSourceUserId(String sourceUserId) {
+        this.sourceUserId = sourceUserId;
+    }
+    
+    public String getTargetUserId() {
+        return targetUserId;
+    }
+    
+    public void setTargetUserId(String targetUserId) {
+        this.targetUserId = targetUserId;
+    }
+    
+    // Legacy compatibility methods for ArangoDB
     public String getFrom() {
-        return from;
+        return sourceUserId;
     }
     
     public void setFrom(String from) {
-        this.from = from;
+        this.sourceUserId = from;
     }
     
     public String getTo() {
-        return to;
+        return targetUserId;
     }
     
     public void setTo(String to) {
-        this.to = to;
+        this.targetUserId = to;
     }
     
     public String getType() {

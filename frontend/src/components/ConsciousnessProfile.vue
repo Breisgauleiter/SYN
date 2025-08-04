@@ -1,5 +1,25 @@
 <template>
   <div class="consciousness-profile">
+    <!-- API Testing Section -->
+    <div class="api-testing-section">
+      <h2>🔗 Backend API Integration</h2>
+      <div class="api-status">
+        <div class="status-indicator" :class="{ 'online': apiConnected, 'offline': !apiConnected }">
+          {{ apiConnected ? '🟢 Backend Connected' : '🔴 Backend Offline' }}
+        </div>
+        <button @click="testBackendConnection" class="test-btn">
+          Test Connection
+        </button>
+        <button @click="createTestProfile" class="test-btn">
+          Create Test Profile
+        </button>
+      </div>
+      <div v-if="apiResponse" class="api-response">
+        <h3>Last API Response:</h3>
+        <pre>{{ JSON.stringify(apiResponse, null, 2) }}</pre>
+      </div>
+    </div>
+
     <!-- Sacred Consciousness Header -->
     <div class="profile-header">
       <div class="consciousness-mandala" :class="journey.currentPhase">
@@ -96,11 +116,49 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useConsciousnessStore } from '../stores/consciousness'
 import type { ConsciousnessLevel, SynchronicityType } from '../types/consciousness'
 
 const consciousnessStore = useConsciousnessStore()
+
+// API Testing State
+const apiConnected = ref(false)
+const apiResponse = ref<any>(null)
+
+// Test API connection on mount
+onMounted(async () => {
+  apiConnected.value = await consciousnessStore.checkBackendHealth()
+})
+
+// API Testing Functions
+async function testBackendConnection() {
+  try {
+    apiConnected.value = await consciousnessStore.checkBackendHealth()
+    if (apiConnected.value) {
+      // Test sacred geometry endpoint
+      const response = await fetch('http://localhost:8081/api/v1/consciousness/sacred-geometry/test-user', {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      })
+      if (response.ok) {
+        apiResponse.value = await response.json()
+      }
+    }
+  } catch (error) {
+    console.error('API test error:', error)
+    apiConnected.value = false
+  }
+}
+
+async function createTestProfile() {
+  try {
+    const result = await consciousnessStore.createUserProfile()
+    apiResponse.value = result
+  } catch (error) {
+    console.error('Profile creation error:', error)
+  }
+}
 
 // Computed Properties
 const metrics = computed(() => consciousnessStore.metrics)
@@ -178,6 +236,78 @@ function formatDate(date: string): string {
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-lg);
+  
+  .api-testing-section {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: rgba(var(--sacred-primary-rgb), 0.1);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid rgba(var(--sacred-primary-rgb), 0.2);
+    
+    h2 {
+      margin-bottom: var(--spacing-md);
+      color: var(--sacred-primary);
+    }
+    
+    .api-status {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+      
+      .status-indicator {
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--border-radius-md);
+        font-weight: 600;
+        
+        &.online {
+          background: rgba(34, 197, 94, 0.2);
+          color: #22c55e;
+          border: 1px solid #22c55e;
+        }
+        
+        &.offline {
+          background: rgba(239, 68, 68, 0.2);
+          color: #ef4444;
+          border: 1px solid #ef4444;
+        }
+      }
+      
+      .test-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        background: var(--sacred-primary);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-md);
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: var(--sacred-secondary);
+          transform: translateY(-2px);
+        }
+      }
+    }
+    
+    .api-response {
+      margin-top: var(--spacing-md);
+      
+      h3 {
+        margin-bottom: var(--spacing-sm);
+        color: var(--sacred-secondary);
+      }
+      
+      pre {
+        background: rgba(0, 0, 0, 0.1);
+        padding: var(--spacing-md);
+        border-radius: var(--border-radius-md);
+        overflow-x: auto;
+        font-size: 0.9em;
+        border: 1px solid rgba(var(--sacred-primary-rgb), 0.2);
+      }
+    }
+  }
   
   .profile-header {
     display: flex;

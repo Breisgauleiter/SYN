@@ -1,7 +1,7 @@
 package org.syntopia.consciousness.platform.repository.tao;
 
-import com.arangodb.springframework.annotation.Query;
-import com.arangodb.springframework.repository.ArangoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.syntopia.consciousness.platform.domain.SyntopiaUser;
@@ -11,41 +11,33 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * TAO User Repository - Objects Collection for SyntopiaUser
+ * TAO User Repository - JPA Implementation for H2 Development
  * 
- * Implements Facebook's TAO (The Associations and Objects) pattern
- * for high-performance consciousness network queries.
+ * Simplified JPA version for development. Will be replaced with
+ * ArangoDB TAO implementation in production.
  * 
  * @author SYNtopia Consciousness Collective
  * @since 2025-08-04
  */
 @Repository
-public interface TAOUserRepository extends ArangoRepository<SyntopiaUser, String> {
+public interface TAOUserRepository extends JpaRepository<SyntopiaUser, String> {
 
-    // =================== TAO OBJECT QUERIES ===================
+    // =================== BASIC JPA QUERIES ===================
     
     /**
-     * Find user by username (TAO Object lookup)
+     * Find user by username
      */
-    @Query("FOR user IN users FILTER user.username == @username RETURN user")
-    Optional<SyntopiaUser> findByUsername(@Param("username") String username);
+    Optional<SyntopiaUser> findByUsername(String username);
     
     /**
-     * Find user by email (TAO Object lookup)
+     * Find user by email
      */
-    @Query("FOR user IN users FILTER user.email == @email RETURN user")
-    Optional<SyntopiaUser> findByEmail(@Param("email") String email);
+    Optional<SyntopiaUser> findByEmail(String email);
     
     /**
-     * Find users by consciousness level range (TAO Object filtering)
+     * Find users by consciousness level range - JPA JPQL version
      */
-    @Query("""
-        FOR user IN users 
-            FILTER user.currentSCL >= @minSCL AND user.currentSCL <= @maxSCL
-            SORT user.currentSCL DESC
-            LIMIT @limit
-            RETURN user
-        """)
+    @Query(value = "SELECT * FROM SYNTOPIA_USER u WHERE u.CURRENT_LEVEL >= :minSCL AND u.CURRENT_LEVEL <= :maxSCL ORDER BY u.CURRENT_LEVEL DESC LIMIT :limit", nativeQuery = true)
     List<SyntopiaUser> findByConsciousnessLevelRange(
         @Param("minSCL") Integer minSCL, 
         @Param("maxSCL") Integer maxSCL,
@@ -53,154 +45,22 @@ public interface TAOUserRepository extends ArangoRepository<SyntopiaUser, String
     );
     
     /**
-     * Find users by Gene Key (TAO Object search)
+     * Find users by Business Track - JPA version
      */
-    @Query("""
-        FOR user IN users
-            FILTER @geneKey IN user.activatedGeneKeys
-            SORT user.consciousnessScore DESC
-            LIMIT @limit
-            RETURN user
-        """)
-    List<SyntopiaUser> findByGeneKey(@Param("geneKey") String geneKey, @Param("limit") Integer limit);
+    @Query("SELECT u FROM SyntopiaUser u WHERE u.primaryBusinessTrack = :track")
+    List<SyntopiaUser> findByBusinessTrack(@Param("track") String track);
     
     /**
-     * Find users by Business Track (TAO Object filtering)
+     * Find active users in last N days
      */
-    @Query("""
-        FOR user IN users
-            FILTER @businessTrack IN user.roles[*].name
-            FILTER user.isGamefiedModeEnabled == true
-            SORT user.lastActiveAt DESC
-            LIMIT @limit
-            RETURN user
-        """)
-    List<SyntopiaUser> findActiveUsersByBusinessTrack(
-        @Param("businessTrack") String businessTrack,
-        @Param("limit") Integer limit
-    );
+    @Query("SELECT u FROM SyntopiaUser u WHERE u.lastActiveAt >= :since ORDER BY u.lastActiveAt DESC")
+    List<SyntopiaUser> findActiveUsersSince(@Param("since") LocalDateTime since);
     
     /**
-     * Find recently active users (TAO Object time-based query)
+     * Find users who completed hologenetic profile
      */
-    @Query("""
-        FOR user IN users
-            FILTER user.lastActiveAt >= @since
-            SORT user.lastActiveAt DESC
-            LIMIT @limit
-            RETURN user
-        """)
-    List<SyntopiaUser> findRecentlyActiveUsers(
-        @Param("since") LocalDateTime since,
-        @Param("limit") Integer limit
-    );
-    
-    // =================== TAO CONSCIOUSNESS ANALYTICS ===================
-    
-    /**
-     * Count users by consciousness level (TAO Analytics)
-     */
-    @Query("""
-        FOR user IN users
-            COLLECT scl = user.currentSCL WITH COUNT INTO count
-            SORT scl ASC
-            RETURN {consciousnessLevel: scl, userCount: count}
-        """)
-    List<Object> getConsciousnessLevelDistribution();
-    
-    /**
-     * Get consciousness evolution statistics (TAO Aggregation)
-     */
-    @Query("""
-        FOR user IN users
-            FILTER user.consciousnessScore != null
-            COLLECT AGGREGATE 
-                avgConsciousness = AVERAGE(user.consciousnessScore),
-                maxConsciousness = MAX(user.consciousnessScore),
-                minConsciousness = MIN(user.consciousnessScore),
-                totalUsers = COUNT()
-            RETURN {
-                averageConsciousness: avgConsciousness,
-                maximumConsciousness: maxConsciousness,
-                minimumConsciousness: minConsciousness,
-                totalUsers: totalUsers
-            }
-        """)
-    Object getConsciousnessStatistics();
-    
-    /**
-     * Find consciousness evolution leaders (TAO Ranking)
-     */
-    @Query("""
-        FOR user IN users
-            FILTER user.consciousnessScore != null
-            SORT user.consciousnessScore DESC, user.currentSCL DESC
-            LIMIT @limit
-            RETURN {
-                user: user,
-                consciousnessRank: ROW_NUMBER()
-            }
-        """)
-    List<Object> getConsciousnessLeaders(@Param("limit") Integer limit);
-    
-    // =================== TAO GENE KEYS QUERIES ===================
-    
-    /**
-     * Find users with compatible Gene Keys (TAO Set Operations)
-     */
-    @Query("""
-        FOR user IN users
-            LET userGeneKeys = user.activatedGeneKeys
-            LET targetGeneKeys = @targetGeneKeys
-            LET commonKeys = INTERSECTION(userGeneKeys, targetGeneKeys)
-            FILTER LENGTH(commonKeys) > 0
-            SORT LENGTH(commonKeys) DESC
-            LIMIT @limit
-            RETURN {
-                user: user,
-                commonGeneKeys: commonKeys,
-                compatibilityScore: LENGTH(commonKeys) / LENGTH(targetGeneKeys)
-            }
-        """)
-    List<Object> findGeneKeysCompatibleUsers(
-        @Param("targetGeneKeys") List<String> targetGeneKeys,
-        @Param("limit") Integer limit
-    );
-    
-    /**
-     * Get Gene Keys distribution (TAO Analytics)
-     */
-    @Query("""
-        FOR user IN users
-            FOR geneKey IN user.activatedGeneKeys
-                COLLECT key = geneKey WITH COUNT INTO usage
-                SORT usage DESC
-                LIMIT @limit
-                RETURN {geneKey: key, usageCount: usage}
-        """)
-    List<Object> getGeneKeysDistribution(@Param("limit") Integer limit);
-    
-    // =================== TAO PERFORMANCE OPTIMIZATION ===================
-    
-    /**
-     * Batch user lookup by IDs (TAO Bulk Operations)
-     */
-    @Query("""
-        FOR userId IN @userIds
-            FOR user IN users
-                FILTER user._key == userId
-                RETURN user
-        """)
-    List<SyntopiaUser> findUsersByIds(@Param("userIds") List<String> userIds);
-    
-    /**
-     * Count total active users (TAO Performance Query)
-     */
-    @Query("""
-        FOR user IN users
-            FILTER user.lastActiveAt >= @activeThreshold
-            COLLECT WITH COUNT INTO count
-            RETURN count
-        """)
-    Long countActiveUsers(@Param("activeThreshold") LocalDateTime activeThreshold);
+    @Query("SELECT u FROM SyntopiaUser u WHERE u.profileCompletedAt IS NOT NULL ORDER BY u.profileCompletedAt DESC")
+    List<SyntopiaUser> findUsersWithCompletedProfiles();
+
+    // TODO: Re-implement with ArangoDB TAO queries when switching to production
 }

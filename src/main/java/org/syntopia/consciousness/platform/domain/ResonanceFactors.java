@@ -1,13 +1,24 @@
 package org.syntopia.consciousness.platform.domain;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Column;
+
 /**
  * Sacred resonance calculation factors for consciousness connections
  * Used in TAO Association pattern for detailed edge properties
  */
+@Embeddable
 public class ResonanceFactors {
+    @Column(name = "gene_keys_compatibility")
     private Double geneKeysCompatibility;
+    
+    @Column(name = "consciousness_level_synergy") 
     private Double consciousnessLevelSynergy;
+    
+    @Column(name = "business_track_alignment")
     private Double businessTrackAlignment;
+    
+    @Column(name = "synchronicity_factor")
     private Double synchronicityFactor;
     
     // Constructors
