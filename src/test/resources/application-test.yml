@@ -1,0 +1,49 @@
+spring:
+  profiles:
+    active: test
+  
+  # ArangoDB TAO Test Configuration
+  data:
+    arango:
+      database: syntopia_test
+      username: root
+      password: ${ARANGODB_PASSWORD:openSesame}
+      host: localhost
+      port: 8529
+      timeout: 30000
+      connection-pooling:
+        max-connections: 20
+        min-connections: 5
+        max-idle-time: 600
+      ssl:
+        enabled: false
+  
+  # Redis Test Configuration  
+  redis:
+    host: localhost
+    port: 6379
+    database: 1  # Use test database
+    timeout: 2000ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000ms
+
+# Logging for Test Debugging
+logging:
+  level:
+    org.syntopia.consciousness: DEBUG
+    com.arangodb: DEBUG
+    org.springframework.data.arangodb: DEBUG
+    redis: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Test-specific properties
+syntopia:
+  consciousness:
+    test-mode: true
+    skip-external-apis: true
+    mock-gene-keys-calculations: false

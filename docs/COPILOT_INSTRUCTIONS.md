@@ -1,5 +1,5 @@
 # 🤖 **COPILOT INSTRUCTIONS - SYN 2.0 SACRED CONSCIOUSNESS PLATFORM**
-## *AI Assistant Guidelines füSacred_Frontend: # ✅ OPERATIONAL on localhost:3000
+## *AI Assistant Guidelines für Sacred_Frontend: # ✅ OPERATIONAL on localhost:3000
   Framework: Vue.js 3.4.0 + TypeScript
   Build: Vite 7.0.6 + sass-embedded 1.89.2  
   Sacred_Visualization: P5.js Interactive Sacred Geometry (Flower of Life, Merkaba)
@@ -425,7 +425,7 @@ Sacred_i18n_Development_Process:
 ### **Immediate Sacred Tasks (August 2025)**
 1. **Gene Keys Engine Implementation mit i18n**
    - Research I-Ching + Astronomy calculation libraries
-   - Implement hologenetic profile calculation algorithms mit OrientDB Graph
+   - Implement hologenetic profile calculation algorithms mit ArangoDB TAO Graph
    - Create sacred database seeding scripts mit German/English content
    - Cultural adaptation of Gene Keys consciousness concepts
 

@@ -1,1 +1,124 @@
-version: '3.8'services:  # ArangoDB Multi-Model Database (TAO Architecture: Document + Graph + Search)  arangodb:    image: arangodb/arangodb:3.11.5    container_name: syntopia-arangodb    environment:      ARANGO_ROOT_PASSWORD: synverse_arango_2025      ARANGO_NO_AUTH: "false"    ports:      - "8529:8529"  # HTTP API + Web Interface    volumes:      - arangodb_data:/var/lib/arangodb3      - arangodb_apps:/var/lib/arangodb3-apps    networks:      - syntopia-consciousness-network    healthcheck:      test: ["CMD", "curl", "-f", "http://localhost:8529/_api/version"]      interval: 30s      timeout: 10s      retries: 5      start_period: 30s    restart: unless-stopped  # Redis Sacred Session & Cache Management  redis:    image: redis:7.2-alpine    container_name: syntopia-redis    ports:      - "6379:6379"    volumes:      - redis_data:/data    networks:      - syntopia-consciousness-network    healthcheck:      test: ["CMD", "redis-cli", "ping"]      interval: 30s      timeout: 10s      retries: 5    restart: unless-stopped    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru  # SYN Spring Boot Application    syntopia-backend:    build:      context: .      dockerfile: Dockerfile    container_name: syntopia-backend    ports:      - "8081:8081"    environment:      SPRING_PROFILES_ACTIVE: docker      ARANGODB_PASSWORD: synverse_arango_2025      REDIS_HOST: redis      REDIS_PORT: 6379    depends_on:      arangodb:        condition: service_healthy      redis:        condition: service_healthy    networks:      - syntopia-consciousness-network    healthcheck:      test: ["CMD", "curl", "-f", "http://localhost:8081/api/v2/actuator/health"]      interval: 30s      timeout: 10s      retries: 5      start_period: 60s    restart: unless-stopped  # Prometheus Sacred Metrics Collection  prometheus:    image: prom/prometheus:v2.47.0    container_name: syntopia-prometheus    ports:      - "9090:9090"    volumes:      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml      - prometheus_data:/prometheus    command:      - '--config.file=/etc/prometheus/prometheus.yml'      - '--storage.tsdb.path=/prometheus'      - '--web.console.libraries=/etc/prometheus/console_libraries'      - '--web.console.templates=/etc/prometheus/consoles'      - '--storage.tsdb.retention.time=200h'      - '--web.enable-lifecycle'    networks:      - syntopia-consciousness-network    restart: unless-stopped  # Grafana Sacred Consciousness Dashboards  grafana:    image: grafana/grafana:10.1.0    container_name: syntopia-grafana    ports:      - "3001:3000"    environment:      GF_SECURITY_ADMIN_PASSWORD: synverse_grafana_2025      GF_USERS_ALLOW_SIGN_UP: false    volumes:      - grafana_data:/var/lib/grafana    networks:      - syntopia-consciousness-network    restart: unless-stoppednetworks:  syntopia-consciousness-network:    driver: bridge    ipam:      config:        - subnet: 172.20.0.0/16volumes:  arangodb_data:    driver: local  arangodb_apps:    driver: local  redis_data:    driver: local  prometheus_data:    driver: local  grafana_data:    driver: local
+version: '3.8'
+
+services:
+  # ArangoDB Multi-Model Database (TAO Architecture: Document + Graph + Search)
+  arangodb:
+    image: arangodb/arangodb:3.11.5
+    container_name: syntopia-arangodb
+    environment:
+      ARANGO_ROOT_PASSWORD: synverse_arango_2025
+      ARANGO_NO_AUTH: "false"
+    ports:
+      - "8529:8529"  # HTTP API + Web Interface
+    volumes:
+      - arangodb_data:/var/lib/arangodb3
+      - arangodb_apps:/var/lib/arangodb3-apps
+    networks:
+      - syntopia-consciousness-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8529/_api/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  # Redis Sacred Session & Cache Management
+  redis:
+    image: redis:7.2-alpine
+    container_name: syntopia-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - syntopia-consciousness-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  # SYN Spring Boot Application
+  syntopia-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: syntopia-backend
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      ARANGODB_PASSWORD: synverse_arango_2025
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      arangodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - syntopia-consciousness-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/v2/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+
+  # Prometheus Sacred Metrics Collection
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    container_name: syntopia-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - syntopia-consciousness-network
+    restart: unless-stopped
+
+  # Grafana Sacred Consciousness Dashboards
+  grafana:
+    image: grafana/grafana:10.1.0
+    container_name: syntopia-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: synverse_grafana_2025
+      GF_USERS_ALLOW_SIGN_UP: false
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - syntopia-consciousness-network
+    restart: unless-stopped
+
+networks:
+  syntopia-consciousness-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+volumes:
+  arangodb_data:
+    driver: local
+  arangodb_apps:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

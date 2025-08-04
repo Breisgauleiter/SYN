@@ -253,6 +253,46 @@ public class SyntopiaUser {
     public Long getVersion() { return version; }
     public void setVersion(Long version) { this.version = version; }
     
+    // Missing methods required by service layer
+    public List<Integer> getActivatedGeneKeys() {
+        List<Integer> activatedKeys = new ArrayList<>();
+        if (hologeneticProfile != null) {
+            // Add the 4 primary gene keys
+            if (hologeneticProfile.getLifeworkGeneKey() != null) {
+                activatedKeys.add(hologeneticProfile.getLifeworkGeneKey().getKeyNumber());
+            }
+            if (hologeneticProfile.getEvolutionGeneKey() != null) {
+                activatedKeys.add(hologeneticProfile.getEvolutionGeneKey().getKeyNumber());
+            }
+            if (hologeneticProfile.getRadianceGeneKey() != null) {
+                activatedKeys.add(hologeneticProfile.getRadianceGeneKey().getKeyNumber());
+            }
+            if (hologeneticProfile.getPurposeGeneKey() != null) {
+                activatedKeys.add(hologeneticProfile.getPurposeGeneKey().getKeyNumber());
+            }
+        }
+        return activatedKeys;
+    }
+    
+    public Integer getCurrentSCL() {
+        return currentLevel != null ? currentLevel.getLevel() : 1;
+    }
+    
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        roles.add("USER");
+        if (primaryBusinessTrack != null) {
+            roles.add("BUSINESS_TRACK_" + primaryBusinessTrack.name());
+        }
+        if (getCurrentSCL() >= 10) {
+            roles.add("CONSCIOUSNESS_GUIDE");
+        }
+        if (getCurrentSCL() >= 20) {
+            roles.add("COMMUNITY_LEADER");
+        }
+        return roles;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

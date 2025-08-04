@@ -23,7 +23,7 @@
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <arangodb.version>7.3.0</arangodb.version>
         <redis.version>3.3.2</redis.version>
-        <graphql.version>22.1</graphql.version>
+        <graphql-extended-scalars.version>22.0</graphql-extended-scalars.version>
         <testcontainers.version>1.19.8</testcontainers.version>
     </properties>
     
@@ -60,16 +60,28 @@
         </dependency>
         
         <!-- ArangoDB Multi-Model Database -->
+                <!-- ArangoDB Dependencies - TAO Architecture Support -->
         <dependency>
             <groupId>com.arangodb</groupId>
-            <artifactId>arangodb-spring-boot-starter</artifactId>
-            <version>${arangodb.version}</version>
+            <artifactId>arangodb-spring-data</artifactId>
+            <version>4.6.0</version>
         </dependency>
-        
         <dependency>
             <groupId>com.arangodb</groupId>
             <artifactId>arangodb-java-driver</artifactId>
-            <version>${arangodb.version}</version>
+            <version>7.21.0</version>
+        </dependency>
+        
+        <!-- ArangoDB Protocol Support -->
+        <dependency>
+            <groupId>com.arangodb</groupId>
+            <artifactId>http-protocol</artifactId>
+            <version>7.21.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.arangodb</groupId>
+            <artifactId>jackson-serde-json</artifactId>
+            <version>7.21.0</version>
         </dependency>
         
         <!-- Redis Session & Caching -->
@@ -92,7 +104,7 @@
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-extended-scalars</artifactId>
-            <version>${graphql.version}</version>
+            <version>${graphql-extended-scalars.version}</version>
         </dependency>
         
         <!-- WebSocket for Real-time -->

@@ -352,6 +352,55 @@ public class HologeneticProfile {
     public String getVerificationNotes() { return verificationNotes; }
     public void setVerificationNotes(String verificationNotes) { this.verificationNotes = verificationNotes; }
     
+    // Simple Builder Pattern for Service Layer
+    public static HologeneticProfileBuilder builder() {
+        return new HologeneticProfileBuilder();
+    }
+    
+    public static class HologeneticProfileBuilder {
+        private HologeneticProfile profile = new HologeneticProfile();
+        
+        public HologeneticProfileBuilder birthDate(LocalDate birthDate) {
+            profile.setBirthDate(birthDate);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder birthTime(String birthTime) {
+            profile.setBirthTime(birthTime);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder birthLocation(String birthLocation) {
+            profile.setBirthLocation(birthLocation);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder lifeworkGeneKey(GeneKey lifeworkGeneKey) {
+            profile.setLifeworkGeneKey(lifeworkGeneKey);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder evolutionGeneKey(GeneKey evolutionGeneKey) {
+            profile.setEvolutionGeneKey(evolutionGeneKey);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder radianceGeneKey(GeneKey radianceGeneKey) {
+            profile.setRadianceGeneKey(radianceGeneKey);
+            return this;
+        }
+        
+        public HologeneticProfileBuilder purposeGeneKey(GeneKey purposeGeneKey) {
+            profile.setPurposeGeneKey(purposeGeneKey);
+            return this;
+        }
+        
+        public HologeneticProfile build() {
+            profile.setCalculatedAt(LocalDateTime.now());
+            return profile;
+        }
+    }
+    
     @Override
     public String toString() {
         return "HologeneticProfile{" +
