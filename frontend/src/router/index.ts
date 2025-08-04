@@ -11,6 +11,7 @@ const GeneKeysExplorer = () => import('@/views/gene-keys/GeneKeysExplorer.vue')
 const CommunityCodonRings = () => import('@/views/community/CommunityCodonRings.vue')
 const SynQuestsDashboard = () => import('@/views/quests/SynQuestsDashboard.vue')
 const SacredGeometryLab = () => import('@/views/sacred-geometry/SacredGeometryLab.vue')
+const ContributingIntegrationTest = () => import('@/views/test/ContributingIntegrationTest.vue')
 
 // Sacred Route Definitions
 const routes: Array<RouteRecordRaw> = [
@@ -108,6 +109,16 @@ const routes: Array<RouteRecordRaw> = [
       title: 'SYN Quests Dashboard - SYNtopia',
       requiresAuth: true,
       consciousness: 'quests'
+    }
+  },
+  {
+    path: '/test/contributing',
+    name: 'ContributingTest',
+    component: ContributingIntegrationTest,
+    meta: {
+      title: 'Contributing Integration Test - SYNtopia',
+      requiresAuth: false,
+      consciousness: 'test'
     }
   },
   {
