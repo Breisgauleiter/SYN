@@ -39,6 +39,16 @@ public class SyntopiaUser {
     @Column(nullable = false)
     private String passwordHash;
     
+    private String firstName;
+    private String lastName;
+    private String avatar;
+    
+    // Sacred Consciousness Level
+    private String consciousnessLevel = "AWAKENING";
+    
+    // Personal Vision (can be encrypted for privacy)
+    private String personalVision;
+    
     // Consciousness Profile - Simplified for MVP
     // TODO: Re-enable full HologeneticProfile after solving mapping conflicts
     // @Embedded
@@ -221,6 +231,21 @@ public class SyntopiaUser {
     
     public String getPasswordHash() { return passwordHash; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    
+    public String getAvatar() { return avatar; }
+    public void setAvatar(String avatar) { this.avatar = avatar; }
+    
+    public String getConsciousnessLevel() { return consciousnessLevel; }
+    public void setConsciousnessLevel(String consciousnessLevel) { this.consciousnessLevel = consciousnessLevel; }
+    
+    public String getPersonalVision() { return personalVision; }
+    public void setPersonalVision(String personalVision) { this.personalVision = personalVision; }
     
     // TODO: Re-enable when HologeneticProfile mapping is fixed
     // public HologeneticProfile getHologeneticProfile() { return hologeneticProfile; }
